@@ -1,11 +1,11 @@
-certifi==2024.12.14
-joblib==1.4.2
-numpy==2.2.2
-scipy==1.15.1
-threadpoolctl==3.5.0
+certifi
+joblib
+numpy
+scipy
 pandas
 scikit-learn
 imbalanced-learn
 matplotlib
 seaborn
 streamlit
+imblearn
