@@ -6,13 +6,13 @@ import joblib
 
 def evaluate_model(model_path, X_test, y_test):
     """
-    valutazione del modello addestrato utilizzando il test set. Genera il report di classificazione,
+    valutazione del modello addestrato utilizzando il validation set. Genera il report di classificazione,
     la matrice di confusione e la curva ROC-AUC.
 
     Input:
         model_path = modello salvato
-        X_test = feature di test.
-        y_test = target di test.
+        X_test = feature di validation.
+        y_test = target di validation.
 
     Output:
         Risultati della valutazione
@@ -35,14 +35,14 @@ def evaluate_model(model_path, X_test, y_test):
         sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
         plt.title("Confusion Matrix")
         plt.xlabel("Predicted")
-        plt.ylabel("Actual")
+        plt.ylabel("Real")
         plt.show()
 
         # ROC-AUC Score
         auc_score = roc_auc_score(y_test, y_pred_prob)
         print(f"ROC-AUC Score: {auc_score}")
 
-        # Curva ROC
+        #Curva ROC
         fpr, tpr, _ = roc_curve(y_test, y_pred_prob)
         plt.plot(fpr, tpr, label=f"ROC Curve (AUC = {auc_score:.2f})")
         plt.plot([0, 1], [0, 1], 'k--')

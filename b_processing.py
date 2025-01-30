@@ -8,7 +8,7 @@ from a_ingestion import train_data, test_data
 #function for the main script
 def preprocess_data(train_data, test_data, correlation_threshold=0.02):
     """
-    - riempimento dati mancanti con forward fill
+    - riempimento dati mancanti con varie tecniche
     - conversione colonne monetarie in numeri
     - label encoding e one-hot encoding
     - drop di features inutili dopo analisi
@@ -25,15 +25,27 @@ def preprocess_data(train_data, test_data, correlation_threshold=0.02):
     """
 
     # Riempire i valori mancanti
-    train_data = train_data.ffill()
-    #test_data = test_data.drop(['TARGET_FLAG', 'TARGET_AMT'], axis=1)
-    test_data = test_data.ffill()
+    #train_data = train_data.ffill()
+    #test_data = test_data.ffill()
+
+    # x nuova versione pandas
+    train_data = train_data.assign(AGE=train_data['AGE'].fillna(train_data['AGE'].median()))
+    test_data = test_data.assign(AGE=test_data['AGE'].fillna(test_data['AGE'].median()))
+
+    train_data = train_data.assign(JOB=train_data['JOB'].fillna('Unknown'))
+    test_data = test_data.assign(JOB=test_data['JOB'].fillna('Unknown'))
 
     # Identificare le colonne monetarie
     monetary_columns = ['INCOME', 'HOME_VAL', 'BLUEBOOK', 'OLDCLAIM']
     for column in monetary_columns:
-        train_data[column] = train_data[column].replace('[\$,]', '', regex=True).replace('', '0').astype(float)
-        test_data[column] = test_data[column].replace('[\$,]', '', regex=True).replace('', '0').astype(float)
+        train_data[column] = train_data[column].replace('[$,]', '', regex=True).replace('', '0').astype(float)
+        test_data[column] = test_data[column].replace('[$,]', '', regex=True).replace('', '0').astype(float)
+
+    #Riempimento dei valori null pt 2
+    numerical_columns = ['HOME_VAL', 'YOJ', 'INCOME', 'CAR_AGE']
+    for column in numerical_columns:
+        train_data[column] = train_data[column].interpolate()
+        test_data[column] = test_data[column].interpolate()
 
     # Label Encoding per variabili con ordine naturale
     naturalOrder_value = ['PARENT1', 'MSTATUS', 'SEX', 'CAR_USE', 'RED_CAR', 'REVOKED', 'URBANICITY', 'EDUCATION']
@@ -51,7 +63,6 @@ def preprocess_data(train_data, test_data, correlation_threshold=0.02):
     train_data, test_data = train_data.align(test_data, join='inner', axis=1)
 
     # Calcolo della correlazione
-
     correlation_matrix = train_data.corr()
     relevant_features = correlation_matrix['TARGET_FLAG'][abs(correlation_matrix['TARGET_FLAG']) >= correlation_threshold].index
 
@@ -93,8 +104,13 @@ if __name__ == '__main__':
     print(f"0: {train_data['TARGET_FLAG'].value_counts()[0]} ({target_counts[0]:.2f}%)")
     print(f"1: {train_data['TARGET_FLAG'].value_counts()[1]} ({target_counts[1]:.2f}%)")
 
-    train_data = train_data.ffill()
-    test_data = test_data.ffill()
+
+    #Riempimento dei valori null
+    train_data = train_data.assign(AGE=train_data['AGE'].fillna(train_data['AGE'].median()))
+    test_data = test_data.assign(AGE=test_data['AGE'].fillna(test_data['AGE'].median()))
+
+    train_data = train_data.assign(JOB=train_data['JOB'].fillna('Unknown'))
+    test_data = test_data.assign(JOB=test_data['JOB'].fillna('Unknown'))
 
     train_object = train_data.select_dtypes(include=['object'])
     test_object = test_data.select_dtypes(include=['object'])
@@ -109,8 +125,14 @@ if __name__ == '__main__':
 
     monetary_columns = ['INCOME', 'HOME_VAL', 'BLUEBOOK', 'OLDCLAIM']
     for column in monetary_columns:
-        test_data[column] = test_data[column].replace('[\$,]', '', regex=True).replace('', '0').astype(float)
-        train_data[column] = train_data[column].replace('[\$,]', '', regex=True).replace('', '0').astype(float)
+        test_data[column] = test_data[column].replace('[$,]', '', regex=True).replace('', '0').astype(float)
+        train_data[column] = train_data[column].replace('[$,]', '', regex=True).replace('', '0').astype(float)
+
+    #Riempimento dei valori null pt 2
+    numerical_columns = ['HOME_VAL', 'YOJ', 'INCOME', 'CAR_AGE']
+    for column in numerical_columns:
+        train_data[column] = train_data[column].interpolate()
+        test_data[column] = test_data[column].interpolate()
 
     label_encoder = LabelEncoder()
 

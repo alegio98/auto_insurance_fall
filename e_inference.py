@@ -20,7 +20,7 @@ def predict(model_path, test_data, output_path='predictions.csv'):
         model = joblib.load(model_path)
 
         # Allineamento delle feature tra il modello e il dataset di test
-        model_features = model.feature_names_in_  # Feature viste durante il training
+        model_features = model.feature_names_in_  #Feature viste durante il training
         test_data_aligned = test_data.reindex(columns=model_features, fill_value=0)
 
         # Genera predizioni
