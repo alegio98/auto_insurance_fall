@@ -2,8 +2,8 @@
 
 The goal of this Machine Learning project is to build a predictive model to help identify customers with a higher insurance risk.
 
-- If a customer has filed at least one insurance claim (TARGET_FLAG = 1)
-- If a customer has never filed an insurance claim (TARGET_FLAG = 0)
+- If a customer has submitted at least one insurance claim (TARGET_FLAG = 1)
+- If a customer has never submitted an insurance claim (TARGET_FLAG = 0)
 
 The project is divided into the following steps:
 
