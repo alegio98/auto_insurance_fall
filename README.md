@@ -17,5 +17,6 @@ Il progetto è stato suddiviso quanto segue:
 7) **requirements.txt** : _Fondamentale per avviare corretamente lo script e singoli file py, installazione di tutte le dipendenze py con comando : ' pip install -r requirements.txt'_
 
 L'applicazione è stata anche distribuita online attraverso Streamlit, ho costruito una semplice applicazione front-end che mostra metriche e risultati interattivi. 
+
 L'applicazione è raggiungibile al seguente link : https://autoinsurancefall-fortim.streamlit.app/
 
