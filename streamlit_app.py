@@ -14,7 +14,7 @@ def plot_confusion_matrix(cm):
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
     plt.title("Confusion Matrix")
     plt.xlabel("Predicted")
-    plt.ylabel("Actual")
+    plt.ylabel("Real")
     st.pyplot(plt)
 
 # Plot ROC curve
