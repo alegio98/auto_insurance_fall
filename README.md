@@ -1,22 +1,21 @@
 # Auto Insurance Fall
-L'obiettivo di questo progetto di Machine Learning è stato quello di
-costruire un modello predittivo che ci aiutasse ad identificare i clienti
-con maggior rischio assicurativo. 
 
-- Se un cliente ha presentato almeno un sinistro (TARGET_FLAG = 1)
-- Se un cliente non ha mai avuto sinistri (TARGET_FLAG = 0)
+The goal of this Machine Learning project is to build a predictive model to help identify customers with a higher insurance risk.
 
-Il progetto è stato suddiviso quanto segue:
+- If a customer has filed at least one insurance claim (TARGET_FLAG = 1)
+- If a customer has never filed an insurance claim (TARGET_FLAG = 0)
 
-1) **a_ingestion.py** : _In questa fase i dataset vengono caricati ed esplorati._
-2) **b_processing.py** : _In questa fase i dataset vengono processati (i valori nulli vengono rimpiazzati in modo coerente, applicate tecniche di Label e One-Hot encoding, analisi della correlazione e importanza, dropping di features inutili, SMOTE)._ 
-3) **c_training.py** : _In questa fase viene addestrato il modello sui dati di train e poi viene scelto il migliore a fronte di vari confronti tra varie tipologie di modelli e ottimizzazione degli iperparametri._
-4) **d_evaluation.py** : _In questa fase il modello viene valutato, stampati report, plot matrice di confusione e Curva ROC e tratte conclusioni._
-5) **e_inference.py** : _In questa fase vengono fatte le predizioni sul test set (che il modello non ha mai visto prima d'ora), viene generato un csv con le varie predizioni e stampato un report su di esse._
-6) **main.py** : _Questo file è utile per lanciare lo script che avvia tutti i processi descritti sopra, il comando da dare da terminale è : ' python main.py '_
-7) **requirements.txt** : _Fondamentale per avviare corretamente lo script e singoli file py, installazione di tutte le dipendenze py con comando : ' pip install -r requirements.txt'_
+The project is divided into the following steps:
 
-L'applicazione è stata anche distribuita online attraverso Streamlit, ho costruito una semplice applicazione front-end che mostra metriche e risultati interattivi. 
+1) `a_ingestion.py`: _In this phase, the datasets are loaded and explored._
+2) `b_processing.py` : _In this phase, the datasets are processed (missing values are replaced consistently, Label Encoding and One-Hot Encoding are applied, correlation and feature importance are analyzed, not revelant features are dropped, SMOTE is used)._ 
+3) `c_training.py` : _In this phase, the model is trained on the training data, and the best model is selected based on comparisons between different models and hyperparameter optimization._
+4) `d_evaluation.py` : _In this phase, the model is evaluated, reports are generated, the Confusion Matrix and ROC Curve are plotted, and conclusions are drawn._
+5) `e_inference.py` : _In this phase, predictions are made on the test set (which the model has never seen before), a CSV file with the predictions is generated, and a report is printed._
+6) `main.py` : _This file is used to run the script that executes all the processes described above. The command to run it from the terminal is: ' python main.py '_
+7) `requirements.txt` : _Essential to correctly run the script and individual Python files. Install all dependencies using the command: ' pip install -r requirements.txt'_
 
-L'applicazione è raggiungibile al seguente link : https://autoinsurancefall-fortim.streamlit.app/
+The application has also been deployed online using Streamlit. A simple front-end application has been built to display metrics and interactive results.
+
+The application is available at the following link: https://autoinsurancefall-fortim.streamlit.app/
 
