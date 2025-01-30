@@ -66,7 +66,7 @@ def evaluate_model(model_path, X_test, y_test):
         raise
 
 
-# --- codice esterno per provare la funzione ---
+# --- codice esterno dove ho provato la funzione ---
 if __name__ == "__main__":
     # Percorso del modello salvato
     model_path = "model.pkl"

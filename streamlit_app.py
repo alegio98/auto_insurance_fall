@@ -63,13 +63,11 @@ except Exception as e:
 
 st.subheader("Feature Correlation with TARGET_FLAG")
 try:
-    # Converti la correlazione in un DataFrame
     correlation_table = pd.DataFrame({
         "Feature Name": target_correlation.index,
         "Correlation with TARGET_FLAG": target_correlation.values
     }).reset_index(drop=True)
 
-    # Mostra la tabella in Streamlit
     st.write(correlation_table)
 
 except Exception as e:
@@ -182,12 +180,12 @@ with st.form("prediction_form"):
     st.write("### Insert Feature Values")
 
     user_input = {}
-    columns = st.columns(2)  # Organizzazione in due colonne
+    columns = st.columns(2)  # Organizzazione in due colonne è solo per la parte grafica
 
     # Creazione dell'input basato sui train_data
     for i, col in enumerate(train_data.columns):
         if col == "TARGET_FLAG" or col == "TARGET_AMT":
-            continue  # Escludiamo il target e valori non utili per la predizione
+            continue
 
         if train_data[col].dtype == 'object':  # Se categorico
             user_input[col] = columns[i % 2].selectbox(
@@ -198,7 +196,7 @@ with st.form("prediction_form"):
         else:  # Se numerico
             user_input[col] = columns[i % 2].number_input(
                 f"{col}:",
-                value=float(train_data[col].median()),  # Default: valore mediano
+                value=float(train_data[col].median()),  #Default: valore mediano
                 step=0.01
             )
 
