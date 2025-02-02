@@ -233,7 +233,7 @@ if submit_button:
 
         # Mostriamo il risultato in modo chiaro
         st.markdown("### Prediction Result:")
-        st.success(f"Prediction: **{'Approved' if prediction == 1 else 'Denied'}**")
+        st.success(f"Prediction: **{'TARGET_FLAG = 1' if prediction == 1 else 'TARGET FLAG = 0'}**")
 
     except Exception as e:
         st.error(f"Error in prediction: {e}")
